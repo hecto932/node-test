@@ -1,9 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
+var Model = require('../models/customers');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+	Model.Customers.findAll().then(function(customers){
+		//res.send(customer);
+		res.render('index', {
+			title: 'Lista de clientes',
+			customers: customers 
+		});
+	});
 });
+
 
 module.exports = router;

@@ -1,5 +1,45 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	.container
+		h1 Clientes
+		a(class='btn btn-default pull-right', href='/customers/addCustomer') Agregar
+		.row
+			.col-md-12
+				.stater-template
+					.table-responsive
+						table.table
+							thead
+								tr
+									th #
+									th Nombre
+									th Apellido
+									th Apellido Materno
+									th Email
+									th Telefono Celular
+									th Telefono Local
+							tbody
+								if customers.length!=[]
+									each customer, i in customers
+										tr
+											td=i+1
+											td
+												a(href='/customers/show/#{customer.id}') #{customer.name}
+											td=customer.lastname
+											td=customer.motherlastname
+											td=customer.email
+											if (customer.localphone)
+												td=customer.localphone
+											else
+												td(style='text-aling:center;') N/A
+											td=customer.mobilephone
+											td 
+												a(href='/customers/update/#{customer.id}')
+													span(class='glyphicon glyphicon-pencil')
+											td
+												a(href='/customers/delete/#{customer.id}')
+													span(class='glyphicon glyphicon-trash')
+								else
+									tr
+										td
+										td No existen clientes registrados aun.

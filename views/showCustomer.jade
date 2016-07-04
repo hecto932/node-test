@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	.container
+		.row
+			.col-md-12
+				h1 Datos de cliente
+				p 
+					strong Nombre: 
+					span #{customer.name}
+				p 
+					strong Apellido: 
+					span #{customer.lastname}
+				p 
+					strong Apellido Materno: 
+					span #{customer.motherlastname}
+				p 
+					strong Email: 
+					span #{customer.email}
+				p 
+					strong Telefono local:
+					span  #{customer.localphone}
+				p 
+					strong Telefono Movil: 
+					span #{customer.mobilephone}
+				p 
+					strong Fecha de nacimiento: 
+					span #{new Date(customer.birthday)}

@@ -23,26 +23,44 @@ var Customers = sequelize.define('Customers', {
 	},
 	name: { 
 		type: Sequelize.STRING,
+		validate: {
+      		len: [2,60]
+      	},             
 		allowNull: false
 	},
 	lastname: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [2,30]
+      	},    
 		allowNull: false
 	},
 	motherlastname: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [2,30]
+      	},
 		allowNull: false
 	},
 	email: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [0,90]
+      	},
 		unique: true
 	},
 	localphone: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [0,20]
+      	},
 		allowNull: true
 	},
 	mobilephone: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [0,20]
+      	},
 		allowNull: false
 	},
 	birthday: {
@@ -93,22 +111,37 @@ var Address = sequelize.define('addresses', {
 	},
 	street: { 
 		type: Sequelize.STRING,
+		validate: {
+      		len: [5,80]
+      	},
 		allowNull: false
 	},
 	delegation: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [5,60]
+      	},
 		allowNull: false
 	},
 	city: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [5,60]
+      	},
 		allowNull: false
 	},
 	colony: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [5,30]
+      	},
 		unique: false
 	},
 	state: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [5,30]
+      	},
 		allowNull: false
 	},
 	country_id: {
@@ -117,6 +150,9 @@ var Address = sequelize.define('addresses', {
 	},
 	postalcode: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [5,15]
+      	},
 		allowNull: false
 	},
 	customer_id: {
@@ -140,26 +176,44 @@ var Invoices = sequelize.define('Invoices', {
 	},
 	reasonname: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [2,60]
+      	},
 		allowNull: false
 	},
 	street: { 
 		type: Sequelize.STRING,
+		validate: {
+      		len: [5,80]
+      	},
 		allowNull: false
 	},
 	delegation: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [5,60]
+      	},
 		allowNull: false
 	},
 	city: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [5,60]
+      	},
 		allowNull: false
 	},
 	colony: {
 		type: Sequelize.STRING,
-		allowNull: false
+		validate: {
+      		len: [5,30]
+      	},
+		unique: false
 	},
 	state: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [5,30]
+      	},
 		allowNull: false
 	},
 	country_id: {
@@ -168,6 +222,9 @@ var Invoices = sequelize.define('Invoices', {
 	},
 	postalcode: {
 		type: Sequelize.STRING,
+		validate: {
+      		len: [5,15]
+      	},
 		allowNull: false
 	},
 	customer_id: {

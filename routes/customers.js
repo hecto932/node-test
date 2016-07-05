@@ -28,7 +28,7 @@ router.get('/addCustomer', function(req, res, next){
 router.post('/save', function(req, res, next){
 	var Customer = req.body;
 	var date = Customer.birthday.split('/');
-	Customer.birthday = new Date(date[2], date[1], date[0]);
+	Customer.birthday = date.reverse().join('/');
 	Model.Customers.create(Customer).then(function(customer) {
 		var address = {
 			street: Customer.street,
@@ -60,8 +60,17 @@ router.post('/save', function(req, res, next){
 			res.send(err);
 		});
 	}).catch(function(err){
-		console.log(err);
-		res.send(err);
+		//res.send(err);
+		Model.Country.findAll().then(function(countries){
+			res.render('addcustomer', {
+				title: 'Agregar cliente',
+				countries: countries,
+				err: err
+			});
+		}).catch(function(err){
+			console.log(err);
+			res.redirect('/');
+		});
 	});
 });
 
@@ -76,7 +85,6 @@ router.get('/show/:customerId', function(req, res, next){
 		if(customer === null){
 			res.redirect('/');
 		}else{
-			console.log(customer)
 			Model.Address.find({
 				where: {
 					customer_id: customerId

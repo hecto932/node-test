@@ -25,7 +25,8 @@ block content
 					span #{customer.mobilephone}
 				p 
 					strong Fecha de nacimiento: 
-					span(id='birthday') #{customer.birthday}
+					span(id='birthday')
+						#{[customer.birthday.getDate(), customer.birthday.getMonth(), customer.birthday.getFullYear()].join('/')}
 			.col-md-6
 				h2 Dirección
 				p

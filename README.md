@@ -15,6 +15,7 @@ $ git clone [git-repo-url]
 $ cd respository(node-test)
 $ npm install
 $ Import script on Postgresql using phppgadmin or pgadmin3
+$ Configure in models/customers.js database connection <user>:<password><localhost:<port> and <database name>
 $ npm start
 ```
 if you want to check the application enter in http://localhost:3000

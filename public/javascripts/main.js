@@ -81,9 +81,7 @@ $(function(){
 	      		maxlength: 30
 	    	},
 	    	rfc: {
-	      		required: true,
-	      		minlength: 2,
-	      		maxlength: 30
+	      		required: true
 	    	},
 	    	istreet: {
 	      		required: true,
@@ -240,9 +238,9 @@ $(function(){
   			$('.invoice').attr('disabled', true)
   		}
   	});
-  	/*if($('#invoiceCheckbox').attr('checked')){
-  		$( "#.invoice" ).prop( "disabled", false );
-  	}else{
-  		$( "#.invoice" ).prop( "disabled", false );
-  	}*/
+
+  	$('.datepicker').datepicker({
+  		format: 'dd/mm/yyyy',
+    	startDate: '-3d'
+  	});
 })

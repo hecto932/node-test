@@ -4,10 +4,12 @@ block content
 	.container
 		h1 Agregar nuevo cliente
 		.row
-			div(class='col-md-12')
+			div(class='col-md-12', ng-controller='customer')
 				.col-md-12
 					form(id='formAddCustomer', name='addCustomer', class='form-horizontal', action='/customers/save', method='post')
 						p Los campos con asterisco(*) son obligatorios. 
+						if (err)
+							#{err}
 						h2 Datos de Cliente
 						.form-group
 							label Nombres(*)
@@ -29,7 +31,7 @@ block content
 							input(id='mobilephone', type='text', class='form-control', name='mobilephone', maxlength='20', required='true')
 						.form-group
 							label Fecha de Nacimiento(*)
-							input(id='birthday', type='text', class='form-control', name='birthday', required='true')
+							input(id='birthday', type='text', class='datepicker form-control', name='birthday', required='true')
 						br
 						h2 Direccion
 						.form-group
@@ -63,7 +65,7 @@ block content
 							input(type='text', class='invoice form-control', name='reasonname', required='true', maxlength='60')
 						.form-group
 							label RFC (*)
-							input(id='rfc', type='text', class='invoice form-control', name='rfc', required='true', pattern='/^(([A-Z]|[a-z]|\s){1})(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))/')
+							input(id='regex', type='text', class='invoice form-control', name='rfc', required='true')
 						.form-group
 							label Calle y Numero (*)
 							input(type='text', class='invoice form-control', name='istreet', ng-value='street', maxlength='80')
@@ -86,7 +88,7 @@ block content
 									option(value='#{country.id}')=country.name
 						.form-group
 							label Codigo Postal
-							input(type='text', class='form-control', name='ipostalcode', ng-value='postalcode', maxlength='15', required='true')
+							input(type='text', class='invoice form-control', name='ipostalcode', ng-value='postalcode', maxlength='15', required='true')
 						button(type='submit', class='btn btn-default') Guardar
 							
 

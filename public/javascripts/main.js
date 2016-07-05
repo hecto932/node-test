@@ -1,6 +1,7 @@
 $(function(){
 
 	// INPUTS DESACTIVATES
+	
 	if($(".invoice").is(':checked')){
 		$(".invoice").prop('disabled', false);
 	}
@@ -83,7 +84,40 @@ $(function(){
 	      		required: true,
 	      		minlength: 2,
 	      		maxlength: 30
-	    	}
+	    	},
+	    	istreet: {
+	      		required: true,
+	      		minlength: 2,
+	      		maxlength: 30
+	    	},
+	    	idelegation: {
+	      		required: true,
+	      		minlength: 2,
+	      		maxlength: 30
+	    	},
+	    	icity: {
+	      		required: true,
+	      		minlength: 2,
+	      		maxlength: 30
+	    	},
+	    	icolony: {
+	      		required: true,
+	      		minlength: 2,
+	      		maxlength: 30
+	    	},
+	    	istate: {
+	      		required: true,
+	      		minlength: 2,
+	      		maxlength: 30
+	    	},
+	    	icountry_id: {
+	      		required: true
+	    	},
+	    	ipostalcode: {
+	      		required: true,
+	      		minlength: 2,
+	      		maxlength: 30
+	    	},
 
 	  	},
 		messages: {
@@ -151,6 +185,39 @@ $(function(){
 	      		required: "<span style='color:red;'>Este campo es requerido.</span>",
 	      		minlength: "<span style='color:red;'>Debe contener minimo 2 caracteres.</span>",
 	      		maxlength: "<span style='color:red;'>Debe contener maximo 30 caracteres.</span>"
+	    	},
+	    	istreet: {
+	      		required: "<span style='color:red;'>Este campo es requerido.</span>",
+	      		minlength: "<span style='color:red;'>Debe contener minimo 5 caracteres.</span>",
+	      		maxlength: "<span style='color:red;'>Debe contener maximo 80 caracteres.</span>"
+	    	},
+	    	idelegation: {
+	      		required: "<span style='color:red;'>Este campo es requerido.</span>",
+	      		minlength: "<span style='color:red;'>Debe contener minimo 5 caracteres.</span>",
+	      		maxlength: "<span style='color:red;'>Debe contener maximo 60 caracteres.</span>"
+	    	},
+	    	icity: {
+	      		required: "<span style='color:red;'>Este campo es requerido.</span>",
+	      		minlength: "<span style='color:red;'>Debe contener minimo 5 caracteres.</span>",
+	      		maxlength: "<span style='color:red;'>Debe contener maximo 60 caracteres.</span>"
+	    	},
+	    	icolony: {
+	      		required: "<span style='color:red;'>Este campo es requerido.</span>",
+	      		minlength: "<span style='color:red;'>Debe contener minimo 5 caracteres.</span>",
+	      		maxlength: "<span style='color:red;'>Debe contener maximo 30 caracteres.</span>"
+	    	},
+	    	istate: {
+	      		required: "<span style='color:red;'>Este campo es requerido.</span>",
+	      		minlength: "<span style='color:red;'>Debe contener minimo 5 caracteres.</span>",
+	      		maxlength: "<span style='color:red;'>Debe contener maximo 30 caracteres.</span>"
+	    	},
+	    	icountry_id: {
+	      		required: "<span style='color:red;'>Este campo es requerido.</span>"
+	    	},
+	    	ipostalcode: {
+	      		required: "<span style='color:red;'>Este campo es requerido.</span>",
+	      		minlength: "<span style='color:red;'>Debe contener minimo 5 caracteres.</span>",
+	      		maxlength: "<span style='color:red;'>Debe contener maximo 15 caracteres.</span>"
 	    	}
   		}
 	});
@@ -159,6 +226,10 @@ $(function(){
   	$("#mobilephone").mask("(99) 999 999 99");
   	$("#birthday").mask("99/99/9999",{placeholder:"dd/mm/yyyy"});
 
+  	$('#rfc').formatter({
+	  	'pattern': '^([A-Z]{3})',
+	  	'persistent': true
+	});
   	
 
   	$('#invoiceCheckbox').click(function(oEvent){

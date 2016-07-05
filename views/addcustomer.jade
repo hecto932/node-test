@@ -34,19 +34,19 @@ block content
 						h2 Direccion
 						.form-group
 							label Calle y Numero (*)
-							input(type='text', class='form-control', name='street', ng-model="street")
+							input(type='text', class='form-control', name='street', ng-model="street", maxlength='80')
 						.form-group
 							label Delegacion/Municipio (*)
-							input(type='text', class='form-control', name='delegation', ng-model="delegation")
+							input(type='text', class='form-control', name='delegation', ng-model="delegation", maxlength='60')
 						.form-group
 							label Ciudad (*)
-							input(type='text', class='form-control', name='city', ng-model="city")
+							input(type='text', class='form-control', name='city', ng-model="city", maxlength='60')
 						.form-group
 							label Colonia (*)
-							input(type='text', class='form-control', name='colony', ng-model="colony")
+							input(type='text', class='form-control', name='colony', ng-model="colony", maxlength='30')
 						.form-group
 							label Estado (*)
-							input(type='text', class='form-control', name='state', ng-model="state")
+							input(type='text', class='form-control', name='state', ng-model="state", maxlength='30')
 						.form-group
 							label País (*)
 							select(class='form-control', name='country_id', ng-model='country_id')
@@ -54,31 +54,31 @@ block content
 									option(value='#{country.id}')=country.name
 						.form-group
 							label Codigo Postal
-							input(type='text', class='form-control', name='postalcode', ng-model='postalcode')
+							input(type='text', class='form-control', name='postalcode', ng-model='postalcode', maxlength='15')
 						h2 Facturación
 						label Activar Facturacion
-						input(type='checkbox', id='invoiceCheckbox', class='form-control', name='activate', checked='checked')
+						input(type='checkbox', id='invoiceCheckbox', class='form-control', name='activate')
 						.form-group
 							label Nombre/Razon social (*)
-							input(type='text', class='invoice form-control', name='reasonname', required='true')
+							input(type='text', class='invoice form-control', name='reasonname', required='true', maxlength='60')
 						.form-group
 							label RFC (*)
-							input(type='text', class='invoice form-control', name='rfc', required='true', pattern="^(([A-Z]|[a-z]|\s){1})(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))")
+							input(id='rfc', type='text', class='invoice form-control', name='rfc', required='true', pattern='/^(([A-Z]|[a-z]|\s){1})(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))/')
 						.form-group
 							label Calle y Numero (*)
-							input(type='text', class='invoice form-control', name='istreet', ng-value='street')
+							input(type='text', class='invoice form-control', name='istreet', ng-value='street', maxlength='80')
 						.form-group
 							label Delegacion/Municipio (*)
-							input(type='text', class='invoice form-control', name='idelegation', ng-value='delegation')
+							input(type='text', class='invoice form-control', name='idelegation', ng-value='delegation', maxlength='60')
 						.form-group
 							label Ciudad (*)
-							input(type='text', class='invoice form-control', name='icity', ng-value='city')
+							input(type='text', class='invoice form-control', name='icity', ng-value='city', maxlength='60')
 						.form-group
 							label Colonia (*)
-							input(type='text', class='invoice form-control', name='icolony', ng-value='colony')
+							input(type='text', class='invoice form-control', name='icolony', ng-value='colony', maxlength='30')
 						.form-group
 							label Estado (*)
-							input(type='text', class='invoice form-control', name='istate', ng-value='state')
+							input(type='text', class='invoice form-control', name='istate', ng-value='state', required="true", maxlength='30')
 						.form-group
 							label País (*)
 							select(class='invoice form-control', name='icountry_id', ng-value='country_id')
@@ -86,7 +86,7 @@ block content
 									option(value='#{country.id}')=country.name
 						.form-group
 							label Codigo Postal
-							input(type='text', class='form-control', name='ipostalcode', ng-value='postalcode')
+							input(type='text', class='form-control', name='ipostalcode', ng-value='postalcode', maxlength='15', required='true')
 						button(type='submit', class='btn btn-default') Guardar
 							
 

@@ -4,7 +4,9 @@ var router = express.Router();
 var Model = require('../models/customers');
 
 router.get('/', function(req, res, next){
-	Model.Customers.findAll().then(function(customers){
+	Model.Customers.findAll({
+		order: 'id DESC'
+	}).then(function(customers){
 		res.send(customers);
 	}).catch(function(err){
 		res.send(err);
@@ -38,7 +40,6 @@ router.post('/save', function(req, res, next){
 			postalcode: Customer.postalcode,
 			customer_id: customer.id
 		};
-		console.log(address);
 		Model.Address.create(address).then(function(a){
 			var invoice = {
 				reasonname: Customer.reasonname,
@@ -52,9 +53,8 @@ router.post('/save', function(req, res, next){
 				postalcode: Customer.ipostalcode,
 				customer_id: customer.id
 			};
-			console.log(invoice);
 			Model.Invoices.create(invoice).then(function(i){
-				res.send(i);
+				res.redirect('/')
 			});
 		}).catch(function(err){
 			res.send(err);

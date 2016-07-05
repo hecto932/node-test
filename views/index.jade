@@ -6,39 +6,36 @@ block content
 		a(class='btn btn-default pull-right', href='/customers/addCustomer') Agregar
 		.row
 			.col-md-12
+				input(type="text", class='form-control', ng-model="searchBox.$", name="searchBox", placeholder="Buscador...")
 				.stater-template
 					.table-responsive
 						table.table
 							thead
 								tr
-									th #
 									th Nombre
 									th Apellido
 									th Apellido Materno
 									th Email
 									th Telefono Celular
-									th Telefono Local
-							tbody
+							tbody(ng-controller="customer")
 								if customers.length!=[]
-									each customer, i in customers
-										tr
-											td=i+1
-											td
-												a(href='/customers/show/#{customer.id}') #{customer.name}
-											td=customer.lastname
-											td=customer.motherlastname
-											td=customer.email
-											if (customer.localphone)
-												td=customer.localphone
-											else
-												td(style='text-aling:center;') N/A
-											td=customer.mobilephone
-											td 
-												a(href='/customers/update/#{customer.id}')
-													span(class='glyphicon glyphicon-pencil')
-											td
-												a(href='/customers/delete/#{customer.id}')
-													span(class='glyphicon glyphicon-trash')
+									tr(ng-repeat='customer in customers | filter:searchBox')
+										td
+											{{customer.name}}
+										td
+											{{customer.lastname}}
+										td
+											{{customer.motherlastname}}
+										td
+											{{customer.email}}
+										td
+											{{customer.mobilephone}}
+										td 
+											a(href='/customers/update/{{customer.id}}')
+												span(class='glyphicon glyphicon-pencil')
+										td
+											a(href='/customers/delete/{{customer.id}}')
+												span(class='glyphicon glyphicon-trash')
 								else
 									tr
 										td

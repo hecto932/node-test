@@ -24,7 +24,7 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+http://github.com/hecto932/node-test.git"
+    "url": "git+https://github.com/hecto932/node-test.git"
   },
   "author": "Hector Flores",
   "license": "ISC",

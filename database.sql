@@ -278,10 +278,16 @@ INSERT INTO country (id, iso, name, nicename, iso3, numcode, phonecode) VALUES
 
 CREATE TABLE invoices(
   id SERIAL NOT NULL PRIMARY KEY,
-  address_id INT,
-  customer_id INT,
-  reasonname VARCHAR(65),
-  rfc VARCHAR(80),
-  FOREIGN KEY (address_id) REFERENCES addresses ON DELETE CASCADE ON UPDATE CASCADE,
+  reasonname VARCHAR(65) NOT NULL,
+  rfc VARCHAR(85) NOT NULL,
+  street VARCHAR(85) NOT NULL,
+  delegation VARCHAR(65) NOT NULL,
+  city VARCHAR(65) NOT NULL,
+  colony VARCHAR(35) NOT NULL,
+  state VARCHAR(35) NOT NULL,
+  country_id INT NOT NULL,
+  postalcode VARCHAR(20) NOT NULL,
+  customer_id INT NOT NULL,
+  FOREIGN KEY(country_id) REFERENCES country ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (customer_id) REFERENCES customers ON DELETE CASCADE ON UPDATE CASCADE
 );

@@ -1,4 +1,13 @@
 $(function(){
+
+	// INPUTS DESACTIVATES
+	if($(".invoice").is(':checked')){
+		$(".invoice").prop('disabled', false);
+	}
+	else{
+		$('.invoice').attr('disabled', true);
+	}
+
 	$('#formAddCustomer').validate({
 		rules: {
 	    	name: {
@@ -149,4 +158,20 @@ $(function(){
   	$("#localphone").mask("(99) 999 999 99");
   	$("#mobilephone").mask("(99) 999 999 99");
   	$("#birthday").mask("99/99/9999",{placeholder:"dd/mm/yyyy"});
+
+  	
+
+  	$('#invoiceCheckbox').click(function(oEvent){
+  		if($(this).is(':checked')){
+  			$(".invoice").prop('disabled', false);
+  		}
+  		else{
+  			$('.invoice').attr('disabled', true)
+  		}
+  	});
+  	/*if($('#invoiceCheckbox').attr('checked')){
+  		$( "#.invoice" ).prop( "disabled", false );
+  	}else{
+  		$( "#.invoice" ).prop( "disabled", false );
+  	}*/
 })

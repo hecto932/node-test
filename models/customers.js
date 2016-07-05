@@ -6,6 +6,7 @@ var sequelize = new Sequelize('postgres://postgres:20162504@localhost:5432/nodet
 	}
 });
 
+// TESTING DATABASE CONECTION
 sequelize.authenticate().then(function(err){
 	console.log('Connection has been stablished successfully');
 })
@@ -13,6 +14,7 @@ sequelize.authenticate().then(function(err){
 	console.log('No conection');
 });
 
+// CUSTOMER MODEL
 var Customers = sequelize.define('Customers', {
 	id: {
 		type: Sequelize.INTEGER,
@@ -51,6 +53,7 @@ var Customers = sequelize.define('Customers', {
 	tableName: 'customers'
 });
 
+// COUNTRY MODEL
 var Country = sequelize.define('Country', {
 	id: {
 		type: Sequelize.INTEGER,
@@ -81,6 +84,7 @@ var Country = sequelize.define('Country', {
 	tableName: 'country'
 });
 
+// ADRESSES MODEL
 var Address = sequelize.define('addresses', {
 	id: {
 		type: Sequelize.INTEGER,
@@ -123,6 +127,61 @@ var Address = sequelize.define('addresses', {
 	tableName: 'addresses'
 });
 
+// INVOICES MODEL
+var Invoices = sequelize.define('Invoices', {
+	id: {
+		type: Sequelize.INTEGER,
+		primaryKey: true,
+		autoIncrement: true
+	},
+	rfc: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+	reasonname: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+	street: { 
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+	delegation: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+	city: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+	colony: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+	state: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+	country_id: {
+		type: Sequelize.INTEGER,
+		allowNull: false
+	},
+	postalcode: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+	customer_id: {
+		type: Sequelize.INTEGER,
+		allowNull: false
+	}
+
+}, {
+	tableName: 'invoices'
+});
+
+
+// RELATIONSHIPS
+
 Address.belongsTo(Customers, {
 	foreignKey: 'customer_id',
 	as: "customer"
@@ -133,15 +192,19 @@ Address.belongsTo(Country, {
 	as: "country"
 });
 
-/*
-Customers.findAll().then(function(customers){
-	//console.log(customers);
-}).catch(function(err){
-	console.log(err);
-	console.log('No se pudo realizar la prueba');
+Invoices.belongsTo(Customers, {
+	foreignKey: 'customer_id',
+	as: 'customer'
 });
-*/
 
+Invoices.belongsTo(Country, {
+	foreignKey: 'country_id',
+	as: 'country'
+});
+
+
+// MODULES EXPORTS
+module.exports.Invoices = Invoices;
 module.exports.Country = Country;
 module.exports.Address = Address;
 module.exports.Customers = Customers;

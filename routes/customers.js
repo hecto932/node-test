@@ -25,7 +25,6 @@ router.get('/addCustomer', function(req, res, next){
 
 router.post('/save', function(req, res, next){
 	var Customer = req.body;
-	res.send(Customer);
 	var date = Customer.birthday.split('/');
 	Customer.birthday = new Date(date[2], date[1], date[0]);
 	Model.Customers.create(Customer).then(function(customer) {
@@ -39,8 +38,24 @@ router.post('/save', function(req, res, next){
 			postalcode: Customer.postalcode,
 			customer_id: customer.id
 		};
+		console.log(address);
 		Model.Address.create(address).then(function(a){
-			res.redirect('/');
+			var invoice = {
+				reasonname: Customer.reasonname,
+				rfc: Customer.rfc,
+				street: Customer.istreet,
+				delegation: Customer.idelegation,
+				city: Customer.icity,
+				colony: Customer.icolony,
+				state: Customer.istate,
+				country_id: Customer.icountry_id,
+				postalcode: Customer.ipostalcode,
+				customer_id: customer.id
+			};
+			console.log(invoice);
+			Model.Invoices.create(invoice).then(function(i){
+				res.send(i);
+			});
 		}).catch(function(err){
 			res.send(err);
 		});
@@ -61,6 +76,7 @@ router.get('/show/:customerId', function(req, res, next){
 		if(customer === null){
 			res.redirect('/');
 		}else{
+			console.log(customer)
 			Model.Address.find({
 				where: {
 					customer_id: customerId
@@ -76,11 +92,29 @@ router.get('/show/:customerId', function(req, res, next){
 					}
 				]
 			}).then(function(address){
-				res.render('showCustomer', {
-					title: 'Datos de Cliente',
-					customer: customer,
-					address: address
+				Model.Invoices.find({
+					where: {
+						customer_id: customerId
+					},
+					include:[
+						{
+							model: Model.Customers,
+							as: 'customer'
+						},
+						{
+							model: Model.Country,
+							as: 'country'
+						}
+					]
+				}).then(function(invoice){
+					res.render('showCustomer', {
+						title: 'Datos de Cliente',
+						customer: customer,
+						address: address,
+						invoice: invoice
+					});
 				});
+				/**/
 			});
 		}
 	});

@@ -51,3 +51,30 @@ block content
 					span #{address.postalcode}
 			.col-md-12
 				h2 Facturación
+				p
+					strong Nombre/Razon Social: 
+					span #{invoice.reasonname}
+				p
+					strong RFC: 
+					span #{invoice.rfc}
+				p
+					strong Calle y Numero: 
+					span #{invoice.street}
+				p
+					strong Delegacion/Municipio: 
+					span #{invoice.delegation}
+				p
+					strong Ciudad: 
+					span #{invoice.city}
+				p
+					strong Colonia: 
+					span #{invoice.colony}
+				p
+					strong Estado: 
+					span #{invoice.state}
+				p
+					strong Pais: 
+					span #{invoice.country.name}
+				p
+					strong Codigo Postal: 
+					span #{invoice.postalcode}

@@ -12,18 +12,38 @@ router.get('/', function(req, res, next){
 })
 
 router.get('/addCustomer', function(req, res, next){
-	res.render('addcustomer', {
-		title: 'Agregar cliente'
+	Model.Country.findAll().then(function(countries){
+		res.render('addcustomer', {
+			title: 'Agregar cliente',
+			countries: countries
+		});
+	}).catch(function(err){
+		console.log(err);
+		res.redirect('/');
 	});
 });
 
 router.post('/save', function(req, res, next){
 	var Customer = req.body;
-
-	Customer.birthday = date;
+	res.send(Customer);
+	var date = Customer.birthday.split('/');
+	Customer.birthday = new Date(date[2], date[1], date[0]);
 	Model.Customers.create(Customer).then(function(customer) {
-		console.log(customer);
-		res.redirect('/');
+		var address = {
+			street: Customer.street,
+			delegation: Customer.delegation,
+			city: Customer.city,
+			colony: Customer.colony,
+			state: Customer.state,
+			country_id: Customer.country_id,
+			postalcode: Customer.postalcode,
+			customer_id: customer.id
+		};
+		Model.Address.create(address).then(function(a){
+			res.redirect('/');
+		}).catch(function(err){
+			res.send(err);
+		});
 	}).catch(function(err){
 		console.log(err);
 		res.send(err);
@@ -32,8 +52,8 @@ router.post('/save', function(req, res, next){
 
 router.get('/show/:customerId', function(req, res, next){
 	var customerId = req.params.customerId;
-	//console.log(customerId);
-	Model.Customers.findOne({
+
+	Model.Customers.find({
 		where: {
 			id: customerId
 		}
@@ -41,10 +61,26 @@ router.get('/show/:customerId', function(req, res, next){
 		if(customer === null){
 			res.redirect('/');
 		}else{
-			customer.birthday = customer.birthday.split("/").reverse().join("/");
-			res.render('showCustomer', {
-				title: 'Datos de Cliente',
-				customer: customer
+			Model.Address.find({
+				where: {
+					customer_id: customerId
+				},
+				include:[
+					{
+						model: Model.Customers,
+						as: 'customer'
+					},
+					{
+						model: Model.Country,
+						as: 'country'
+					}
+				]
+			}).then(function(address){
+				res.render('showCustomer', {
+					title: 'Datos de Cliente',
+					customer: customer,
+					address: address
+				});
 			});
 		}
 	});

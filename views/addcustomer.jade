@@ -5,9 +5,10 @@ block content
 		h1 Agregar nuevo cliente
 		.row
 			div(class='col-md-12')
-				.col-md-6
+				.col-md-8
 					form(id='formAddCustomer', name='addCustomer', class='form-horizontal', action='/customers/save', method='post')
 						p Los campos con asterisco(*) son obligatorios. 
+						h2 Datos de Cliente
 						.form-group
 							label Nombres(*)
 							input(type='text', class='form-control', name='name', maxlength='60', required='true')
@@ -21,15 +22,46 @@ block content
 							label Email(*)
 							input(type='email', class='form-control', name='email', maxlength='90', required='true')
 						.form-group
-							label Telefono Local
+							label Teléfono Local
 							input(id='localphone', type='text', class='form-control', name='localphone', maxlength='20')
 						.form-group
-							label Telefono Celular(*)
+							label Teléfono Celular(*)
 							input(id='mobilephone', type='text', class='form-control', name='mobilephone', maxlength='20', required='true')
 						.form-group
 							label Fecha de Nacimiento(*)
 							input(id='birthday', type='text', class='form-control', name='birthday', required='true')
 						br
+						h2 Direccion
+						.form-group
+							label Calle y Numero
+							input(type='text', class='form-control', name='street')
+						.form-group
+							label Delegacion/Municipio
+							input(type='text', class='form-control', name='delegation')
+						.form-group
+							label Ciudad
+							input(type='text', class='form-control', name='city')
+						.form-group
+							label Colonia
+							input(type='text', class='form-control', name='colony')
+						.form-group
+							label Estado
+							input(type='text', class='form-control', name='state')
+						.form-group
+							label País
+							select(class='form-control', name='country_id')
+								each country in countries
+									option(value='#{country.id}')=country.name
+						.form-group
+							label Codigo Postal
+							input(type='text', class='form-control', name='postalcode')
+						h2 Facturación
+						.form-group
+							label Nombre/Razon social
+							input(type='text', class='form-control', name='reasonname', required='true')
+						.form-group
+							label RFC
+							input(type='text', class='form-control', name='rfc', required='true', pattern="^(([A-Z]|[a-z]|\s){1})(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))")
 						button(type='submit', class='btn btn-default') Guardar
 							
 
